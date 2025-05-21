@@ -9,5 +9,5 @@ services:
         ExternalServicesSettings__UrlApiLibrary: ${URL_APILIBRARY}
         ExternalServicesSettings__UrlApiSuscriptions: ${URL_APISUSCRIPTIONS}
     ports:
-      - "${WEBAPP_PORT}:5000"
+      - "${WEBAPP_PORT}:8080"
 
