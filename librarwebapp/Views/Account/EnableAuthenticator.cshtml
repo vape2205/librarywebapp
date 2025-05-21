@@ -1,0 +1,49 @@
+﻿@model EnableAuthenticatorDto
+@{
+    ViewData["Title"] = "Habilitar App Auth";
+}
+
+<h4>@ViewData["Title"]</h4>
+<div>
+    <p>Escanear el QR para habilitar la autenticación en dos pasos:</p>
+    <ol class="list">
+        <li>
+            <div id="qrCode"></div>
+            <div id="qrCodeData" data-url="@Model.AuthenticatorUri"></div>
+        </li>
+        <li>
+            <div class="row">
+                <div class="col-md-6">
+                    <form method="post" asp-action="EnableAuthenticator">
+                        <div class="form-group">
+                            <label asp-for="Code" class="control-label">Verification Code</label>
+                            <input asp-for="Code" class="form-control" autocomplete="off" />
+                            <input asp-for="SecretKey" hidden />
+                            <input asp-for="AuthenticatorUri" hidden />
+                            <input asp-for="Username" hidden />
+                            <span asp-validation-for="Code" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary m-2">Verificar</button>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    </form>
+                </div>
+            </div>
+        </li>
+    </ol>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+    <script src="~/lib/qrcodejs/qrcode.js" data-rocket-defer defer></script>
+    <script type="text/javascript">
+          window.addEventListener("load", () => {
+          const uri = document.getElementById("qrCodeData").getAttribute('data-url');
+          new QRCode(document.getElementById("qrCode"),
+            {
+              text: "@Html.Raw(Model.AuthenticatorUri)",
+              width: 150,
+              height: 150
+            });
+        });
+    </script>
+}

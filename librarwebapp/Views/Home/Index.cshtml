@@ -1,0 +1,12 @@
+﻿@model CatalogoViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (Model != null)
+{
+    <component type="typeof(ListBooks)" render-mode="ServerPrerendered" 
+        param-TieneSuscripcionValida="Model.TieneSuscripcionValida" 
+        param-Books="Model.Books" />
+}
+

@@ -1,0 +1,27 @@
+﻿@using Blazorise
+@using librarwebapp.Models.ExternalServices.Library
+
+<MudGrid>
+    @foreach (var book in Books)
+    {
+        <MudItem xs="3">
+            <CardBook Book="book" TieneSuscripcionValida="TieneSuscripcionValida" />
+        </MudItem>
+    }
+</MudGrid>
+
+
+@code {
+    [Parameter] public IEnumerable<BookModel> Books { get; set; }
+    [Parameter] public bool TieneSuscripcionValida { get; set; }
+
+    private const int cantidadPorGrupo = 3;
+
+    private int CantidadGrupos => (Books.Count() / cantidadPorGrupo);
+
+    private IEnumerable<BookModel> GetBooksGroup(int i)
+    {
+        return Books.Skip(i * cantidadPorGrupo).Take(cantidadPorGrupo).ToList();
+    }
+
+}

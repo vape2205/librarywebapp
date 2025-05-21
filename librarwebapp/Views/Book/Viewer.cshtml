@@ -1,0 +1,9 @@
+﻿@model BookModel
+
+@if (Model != null)
+{
+    <component type="typeof(DetailBook)" render-mode="ServerPrerendered" param-Book="@Model" />
+}
+
+
+

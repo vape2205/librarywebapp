@@ -1,0 +1,15 @@
+﻿@using librarwebapp.Models.ExternalServices.Suscriptions
+
+<MudGrid>
+    @foreach (var suscripcion in Suscripciones)
+    {
+        <MudItem xs="12">
+            <SuscripcionDetail Suscripcion="suscripcion" />
+        </MudItem>
+    }
+</MudGrid>
+
+
+@code {
+    [Parameter] public IEnumerable<SuscripcionDTO> Suscripciones { get; set; }
+}

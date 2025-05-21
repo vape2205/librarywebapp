@@ -1,0 +1,16 @@
+﻿@using Blazorise
+@using librarwebapp.Models.ExternalServices.Library
+
+@if (Book != null)
+{
+    <h1>@Book.Title</h1>
+
+    <PdfViewerContainer Height="Height.Rem(35)">
+        <PdfViewerToolbar ShowPrinting=false />
+        <PdfViewer Source="@Book.UrlDocument" />
+    </PdfViewerContainer>
+}
+
+@code {
+    [Parameter] public BookModel Book { get; set; }
+}

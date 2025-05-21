@@ -1,0 +1,36 @@
+﻿@using librarwebapp.Models.ExternalServices.Suscriptions
+
+@if (Suscripcion != null)
+{
+    <MudCard>
+        <MudCardContent>
+            <MudText Typo="Typo.h5">Suscripcion: @Suscripcion.Id</MudText>
+            <MudText Typo="Typo.body2">Fecha creacion: @Suscripcion.FechaCreacion.ToShortDateString()</MudText>
+            <MudText Typo="Typo.body2">FechaInicio: @Suscripcion.FechaInicio</MudText>
+            <MudText Typo="Typo.body2">FechaFin: @Suscripcion.FechaFin</MudText>
+            <MudText Typo="Typo.body2">Estado: @Enum.GetName(Suscripcion.Estado)</MudText>
+        </MudCardContent>
+        <MudCardActions>
+            @if (Suscripcion.Estado == EstadoSuscripcion.Creado || Suscripcion.Estado == EstadoSuscripcion.Pendiente)
+            {
+                <form method="post" id="ActivarSuscription" class="form-inline" action='@($"Suscription/Activar/{Suscripcion.Id}")'>
+                    <input name="id" value="@Suscripcion.Id" type="hidden"/>
+                    <MudButton Variant="Variant.Text" Color="MudBlazor.Color.Primary" ButtonType="ButtonType.Submit">Activar</MudButton>
+                </form>
+                
+            }
+            @if (Suscripcion.Estado == EstadoSuscripcion.Activo)
+            {
+                <form method="post" id="ActivarSuscription" class="form-inline" action='@($"Suscription/Cancelar/{Suscripcion.Id}")'>
+                    <input name="id" value="@Suscripcion.Id" type="hidden" />
+                    <MudButton Variant="Variant.Text" Color="MudBlazor.Color.Primary" ButtonType="ButtonType.Submit">Cancelar</MudButton>
+                </form>
+            }
+        </MudCardActions>
+    </MudCard>
+}
+
+@code {
+    [Parameter] public SuscripcionDTO Suscripcion { get; set; }
+}
+
