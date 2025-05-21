@@ -1,0 +1,13 @@
+services:
+  library.webapp:
+    image: ${DOCKER_REGISTRY-}librarywebapp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+        ExternalServicesSettings__UrlApiAuth: ${URL_APIAUTH}
+        ExternalServicesSettings__UrlApiLibrary: ${URL_APILIBRARY}
+        ExternalServicesSettings__UrlApiSuscriptions: ${URL_APISUSCRIPTIONS}
+    ports:
+      - "${WEBAPP_PORT}:5000"
+
